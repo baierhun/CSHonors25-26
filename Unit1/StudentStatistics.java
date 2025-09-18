@@ -15,8 +15,13 @@ public class StudentStatistics {
     // 2. Find the highest grade ethan
     public int findHighest() {
         // Person B
-        //  loop to sort through grades from highest to lowest, return the highest score.
-        return 0; // TODO: implement
+        int highestGrade = 0;
+        for (int i = 0; i < grades.length; i++){
+            if (grades[i] > highestGrade){
+                highestGrade = grades[i];
+            }
+        }
+        return highestGrade; 
     }
 
     // 3. Find the lowest grade
