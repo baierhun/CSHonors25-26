@@ -30,10 +30,11 @@ public class StudentStatistics {
         return 0; // TODO: implement
     }
 
-    // 5. Print all grades in sorted order
+    // 5. Print all grades in sorted order -- Nina 
     public void printSortedGrades() {
         // Person E
         // TODO: implement
+        //take all the grades in array, use find highest find lowest, if val before is more than blah blhah
     }
 
     // main for testing
