@@ -20,8 +20,13 @@ public class StudentStatistics {
 
     // 3. Find the lowest grade
     public int findLowest() {
-        // Person C
-        return 0; // TODO: implement
+        int lowest = grades[0];
+        for (int i = 1; i < grades.length; i++) {
+            if (grades[i] < lowest) {
+                lowest = grades[i];
+            }
+        }
+    return lowest;
     }
 
     // 4. Count how many students passed (>= 60)
