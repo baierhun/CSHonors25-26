@@ -50,10 +50,10 @@ public class StudentStatistics {
         StudentStatistics stats = new StudentStatistics(sample);
 
         System.out.println("Average: " + stats.calculateAverage());
-        // System.out.println("Highest: " + stats.findHighest());
-        // System.out.println("Lowest: " + stats.findLowest());
-        // System.out.println("Passing count: " + stats.countPassing());
-        // System.out.print("Sorted grades: ");
-        // stats.printSortedGrades();
+        System.out.println("Highest: " + stats.findHighest());
+        System.out.println("Lowest: " + stats.findLowest());
+        System.out.println("Passing count: " + stats.countPassing());
+        System.out.print("Sorted grades: ");
+        stats.printSortedGrades();
     }
 }
