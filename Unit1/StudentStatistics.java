@@ -12,10 +12,16 @@ public class StudentStatistics {
         return 0.0; // TODO: implement
     }
 
-    // 2. Find the highest grade
+    // 2. Find the highest grade ethan
     public int findHighest() {
         // Person B
-        return 0; // TODO: implement
+        int highestGrade = 0;
+        for (int i = 0; i < grades.length; i++){
+            if (grades[i] > highestGrade){
+                highestGrade = grades[i];
+            }
+        }
+        return highestGrade; 
     }
 
     // 3. Find the lowest grade
