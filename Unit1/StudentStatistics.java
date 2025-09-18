@@ -12,9 +12,10 @@ public class StudentStatistics {
         return 0.0; // TODO: implement
     }
 
-    // 2. Find the highest grade
+    // 2. Find the highest grade ethan
     public int findHighest() {
         // Person B
+        //  loop to sort through grades from highest to lowest, return the highest score.
         return 0; // TODO: implement
     }
 
