@@ -7,9 +7,17 @@ public class StudentStatistics {
     }
 
     // 1. Calculate the average grade
+    private int totalGrades(int[] scores){
+        int total = 0;
+        for(int score : scores){
+            total += score;
+        }
+        return total;
+    }
+
     public double calculateAverage() {
-        // Person A
-        return 0.0; // TODO: implement
+        double average = totalGrades(grades)/grades.length;
+        return average; // TODO: implement
     }
 
     // 2. Find the highest grade
@@ -42,10 +50,10 @@ public class StudentStatistics {
         StudentStatistics stats = new StudentStatistics(sample);
 
         System.out.println("Average: " + stats.calculateAverage());
-        System.out.println("Highest: " + stats.findHighest());
-        System.out.println("Lowest: " + stats.findLowest());
-        System.out.println("Passing count: " + stats.countPassing());
-        System.out.print("Sorted grades: ");
-        stats.printSortedGrades();
+        // System.out.println("Highest: " + stats.findHighest());
+        // System.out.println("Lowest: " + stats.findLowest());
+        // System.out.println("Passing count: " + stats.countPassing());
+        // System.out.print("Sorted grades: ");
+        // stats.printSortedGrades();
     }
 }
