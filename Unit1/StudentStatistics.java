@@ -24,10 +24,16 @@ public class StudentStatistics {
         return 0; // TODO: implement
     }
 
-    // 4. Count how many students passed (>= 60)
+    // 4. Count how many students passed (>= 60) 
     public int countPassing() {
+        int numPassed = 0;
+        for (int i = 0; i < grades.length; i++){
+            if(grades[i] >= 60){
+                numPassed++;
+            }
+        }
         // Person D
-        return 0; // TODO: implement
+        return numPassed; 
     }
 
     // 5. Print all grades in sorted order
