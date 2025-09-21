@@ -32,9 +32,21 @@ public class StudentStatistics {
 
     // 5. Print all grades in sorted order -- Nina 
     public void printSortedGrades() {
-        // Person E
-        // TODO: implement
-        //take all the grades in array, use find highest find lowest, if val before is more than blah blhah
+        // grades[0] = findHighest();
+        // grades[grades.length-1] = findLowest();
+        for (int i = 0; i < grades.length - 1; i++){
+            int maxIndex = i;
+            for(int j = i+1; j < grades.length; j++){
+                if(grades[j] > grades[maxIndex]){
+                    maxIndex = j; 
+                }
+            }
+            int temp = grades[i];
+            grades[i] = grades[maxIndex];
+            grades[maxIndex] = temp;
+            
+            System.out.print(grades[i] + ", ");
+        }
     }
 
     // main for testing
