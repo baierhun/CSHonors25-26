@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -18,9 +19,14 @@ public class MainHall extends Application {
         layout.setBackground(null);
 
         Scene mainScene = new Scene(layout, 600, 400);
+        mainScene.setFill(Color.BLACK);
+
+        Scene dogHouseScene = new DogHouse().getScene(e -> primaryStage.setScene(mainScene));
+        Button dogHouseBtn = new Button("Dog House");
+        dogHouseBtn.setOnAction(e -> primaryStage.setScene(dogHouseScene));
+        layout.getChildren().add(dogHouseBtn);
 
         primaryStage.setTitle("Haunted Mansion");
-        mainScene.setFill(Color.BLACK);
         primaryStage.setScene(mainScene);
         primaryStage.show();
     }
