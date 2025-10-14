@@ -27,13 +27,11 @@ public class TheFinalDinner extends Application implements AppScene{
         titleText.setFont(Font.font("Georgia",30));
         titleText.setStyle("-fx-font-weight:bold; -fx-text-fill: #FFFFFF;" +
                 "-fx-background-color:#383288ff;"); //nts fix border color
-        //titleText.setAlignment(Pos.TOP_RIGHT);
         titleText.setLayoutX(725);
 
         Rectangle txtRectangle = new Rectangle(10, 10, 600, 300);
         txtRectangle.setFill(Color.hsb(244,0.727,0.173));
         txtRectangle.setStyle("-fx-stroke: #4D1005; -fx-stroke-width: 1");
-        //txtRectangle.setLayoutX(50);
 
         Text spookyTxt = new Text("The air feels stale. Between the spotlights of the moon, you can " +
                 "see spiders crawling across the walls. You sit down to take a meal, and there is already " +
@@ -128,39 +126,15 @@ public class TheFinalDinner extends Application implements AppScene{
 
 
 
-//        VBox layout = new VBox(1, titleText,bgText, table, eat, openNote, headTxt);
-//        VBox.setMargin(eat,new Insets(5,10,17,20));
-//        layout.setBackground(Background.fill(Color.hsb(244,0.632,0.535)));
-        //layout.setAlignment(Pos.CENTER);
         Pane layout = new Pane(titleText,bgText, table, eat, openNote, headTxt,noteTxt,homeBtn);
         layout.setBackground(Background.fill(Color.hsb(244,0.632,0.535)));
 
 
         Scene displayScene = new Scene(layout, 1000, 700);
         return displayScene;
-//        return null;
     }
 
     public void start(Stage primaryStage) throws Exception{
-//        Label titleText = new Label("The Final Dinner");
-//        titleText.setFont(Font.font("Georgia",30));
-//        titleText.setStyle("-fx-font-weight:bold; -fx-text-fill: #FFFFFF;" +
-//                "-fx-background-color:#383288ff; -fx-border-color: #4D1005;"); //nts fix border color
-//        titleText.setAlignment(Pos.TOP_RIGHT);
-//
-//        Rectangle txtRectangle = new Rectangle(20.0f, 20.0f, 50.0f, 30.0f);
-//        txtRectangle.setFill(Color.hsb(244,72.7,17.3));
-//        txtRectangle.setStroke(Color.DARKRED);
-//
-//        StackPane bgText = new StackPane(txtRectangle);
-//
-//        VBox layout = new VBox(10, titleText,txtRectangle,bgText);
-//        layout.setBackground(Background.fill(Color.hsb(244,63.2,53.5)));
-//        layout.setAlignment(Pos.CENTER);
-//
-//
-//
-//
         Scene scene = getScene(null);
         primaryStage.setScene(scene);
         primaryStage.setTitle("The Final Dinner");
