@@ -22,12 +22,12 @@ public class ChambersOfDeath implements AppScene{
         description.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
 
 
-        String secretText = "Millions of lice crawl on the bed and all over you.";
+        String scary = "Millions of lice crawl on the bed and all over you.";
         String behind = "You hear a whooshing sound behind you, but when you turn nothing is there.";
         String answer = "lice";
         String red = "#991E06";
 
-        Label secret = new Label(secretText);
+        Label secret = new Label(scary);
         secret.setVisible(false);
         secret.setStyle("-fx-font-weight: bold; -fx-font-size: 15;");
 
@@ -47,28 +47,28 @@ public class ChambersOfDeath implements AppScene{
         lice.setStrokeWidth(3);
         lice.setVisible(true);
 
-        Circle leftEye = new Circle(0, 0, 5);
-        leftEye.setTranslateX(20);
-        leftEye.setTranslateY(-5);
-        leftEye.setFill(Color.RED);
+        Circle topEye = new Circle(0, 0, 5);
+        topEye.setTranslateX(20);
+        topEye.setTranslateY(-5);
+        topEye.setFill(Color.RED);
 
-        Circle rightEye = new Circle(0, 0, 5);
-        rightEye.setTranslateX(20);
-        rightEye.setTranslateY(10);
-        rightEye.setFill(Color.RED);
+        Circle bottomEye = new Circle(0, 0, 5);
+        bottomEye.setTranslateX(20);
+        bottomEye.setTranslateY(10);
+        bottomEye.setFill(Color.RED);
 
         Circle mouth = new Circle(0, 0, 7);
         mouth.setTranslateY(-5);
-        mouth.setFill(Color.BLACK);
+        mouth.setFill(Color.RED);
 
-        StackPane ghostLayout = new StackPane(lice, leftEye, rightEye, mouth);
+        StackPane liceLayout = new StackPane(lice, topEye, bottomEye, mouth);
 //        ghostLayout.getChildren().add(ghost);
-        ghostLayout.setVisible(false);
+        liceLayout.setVisible(false);
 
         Button back = new Button("Back to Main Hall");
         back.setOnAction(e -> {
             secret.setVisible(false);
-            ghostLayout.setVisible(false);
+            liceLayout.setVisible(false);
             input.clear();
             goBack.handle(e);
         });
@@ -76,10 +76,10 @@ public class ChambersOfDeath implements AppScene{
         Button revealButton = new Button("Check out the bed");
         revealButton.setOnAction(e -> {
             if (answer.equalsIgnoreCase(input.getText().trim())) {
-                secret.setText(secretText);
+                secret.setText(scary);
                 secret.setVisible(true);
                 secret.setStyle(String.format("%s-fx-text-fill: %s;", secret.getStyle(), red));
-                ghostLayout.setVisible(true);
+                liceLayout.setVisible(true);
             } else {
                 secret.setText("I travel by crawling, not flying or hopping. \n I lay eggs on a person's head, but I can also live in their clothes. \n What am I?");
                 secret.setVisible(true);
@@ -87,7 +87,7 @@ public class ChambersOfDeath implements AppScene{
             }
         });
 
-        VBox layout = new VBox(10, title, description, windows, input, revealButton, secret, ghostLayout, back);
+        VBox layout = new VBox(15, title, description, windows, input, revealButton, secret, liceLayout, back);
         layout.setBackground(null);
         layout.setAlignment(Pos.CENTER);
 
