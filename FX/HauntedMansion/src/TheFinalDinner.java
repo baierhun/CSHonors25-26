@@ -1,24 +1,16 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.util.Stack;
-
-import static javafx.application.Application.launch;
 
 public class TheFinalDinner extends Application implements AppScene{
     @Override
@@ -123,12 +115,8 @@ public class TheFinalDinner extends Application implements AppScene{
             noteTxt.setVisible(true);
         });
 
-
-
-
         Pane layout = new Pane(titleText,bgText, table, eat, openNote, headTxt,noteTxt,homeBtn);
         layout.setBackground(Background.fill(Color.hsb(244,0.632,0.535)));
-
 
         Scene displayScene = new Scene(layout, 1000, 700);
         return displayScene;
