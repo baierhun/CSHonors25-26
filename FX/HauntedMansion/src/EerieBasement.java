@@ -52,9 +52,9 @@ public class EerieBasement implements AppScene{
         lay.setBackground(null);
         lay.setAlignment(Pos.CENTER);
 
-        Scene ss = new Scene(lay, 600,400);
-        ss.setFill(Color.WHITE);
-        return ss;
+        Scene scene = new Scene(lay, 600,400);
+        scene.setFill(Color.WHITE);
+        return scene;
 
         //Need to return scene, layout, all the elements inside the layout
     }
