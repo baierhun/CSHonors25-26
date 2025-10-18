@@ -8,47 +8,49 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import static java.awt.Color.BLACK;
+import static java.awt.Color.red;
 import static javafx.application.Application.launch;
 
 public class EerieBasement implements AppScene{
+    static final String descriptionText = """
+                *You enter a dimly-lit basement through a creaky set of stairs. 
+                It is completely empty and dirty. \
+                You see a message written sloppily in red. 
+                Click the button to see what it says.*
+                """;
+
+    //Function for creating a label.
+    private Label makeLabel(String text, Color fillColor){
+        Label l = new Label(text);
+        if (fillColor != null){
+            l.setTextFill(fillColor);
+        }
+        return l;
+    }
+
+    private void handleReveal(Label message){
+        //When the button is clicked, reveals the message.
+        message.setVisible(true);
+        message.setStyle(String.format("%s-fx-text-fill: %s;", message.getStyle(), red));
+    }
 
     @Override
     public Scene getScene(EventHandler<ActionEvent> goBack) {
-        Label title1 = new Label("The Eerie Basement");
-        title1.setTextFill(Color.BLACK);
+        Label title1 = makeLabel("The Eerie Basement", null);
+        Label mainDesc = makeLabel(descriptionText, null);
+        Label message = makeLabel("LEAVE THIS HOUSE", Color.RED);
+        message.setVisible(false);
 
-        Label mainDesc = new Label ("*You enter a dimly-lit basement through a creaky set of stairs. It is completely empty and dirty. " +
-                "You see a message written sloppily in red. Click the button to see what it says.*\n");
-        mainDesc.setTextFill(Color.BLACK);
+        //When the button is clicked, reveals the message on the wall.
+        Button revealButton = new Button("Click to reveal message");
+        revealButton.setOnAction(e -> handleReveal(message));
 
-        Button writingButton = new Button("Click here");
-        //lamda function
-        writingButton.setOnAction(e ->{
-            System.out.println("Go to screen 2");
-        });
+        //When the button is clicked, send the user back to the home screen.
         Button homeButton = new Button("Go back home");
-        homeButton.setOnAction(e ->{
-            goBack.handle(e);
-        });
-        //Second screen
-//        Label title2 = new Label("The Eerie Basement");
-//        title2.setTextFill(Color.BLACK);
-//
-//        Label writingDesc1 = new Label("* The wall says:");
-//        writingDesc1.setTextFill(Color.BLACK);
-//
-//        Label writingDesc2 = new Label("LEAVE THIS HOUSE");
-//        writingDesc2.setTextFill(Color.RED);
-//
-//        Label writingDesc3 = new Label ("Click the button to go back. *");
-//        writingDesc3.setTextFill(Color.BLACK);
-//
-//        //Goes back to the first screen
-//        Button backButton = new Button("Go back");
-//        //lamda function
-//        backButton.setOnAction(e ->){
+        homeButton.setOnAction(e ->goBack.handle(e));
 
-        VBox lay = new VBox(10, title1, mainDesc, writingButton, homeButton);
+        VBox lay = new VBox(10, title1, mainDesc, revealButton, message, homeButton);
         lay.setBackground(null);
         lay.setAlignment(Pos.CENTER);
 
@@ -56,7 +58,6 @@ public class EerieBasement implements AppScene{
         scene.setFill(Color.WHITE);
         return scene;
 
-        //Need to return scene, layout, all the elements inside the layout
     }
 
 }
