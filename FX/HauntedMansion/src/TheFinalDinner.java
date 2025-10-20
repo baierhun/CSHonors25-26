@@ -63,14 +63,6 @@ public class TheFinalDinner extends Application implements AppScene{
         return newButton;
     }
 
-    public static EventHandler<ActionEvent> pressButton (Text firstText, Text secondText, Button buttonOne, Button buttonTwo){
-        return e -> {
-            firstText.setVisible(false);
-            secondText.setVisible(true);
-            buttonOne.setVisible(false);
-            buttonTwo.setVisible(true);
-        };
-    }
     public static void pressButton(Button mainButton, Text txtOne, Text txtTwo, Text txtThree, Button btnOne, Button btnTwo){
         mainButton.setOnAction(e -> {
             txtOne.setVisible(false);
