@@ -16,7 +16,7 @@ import static javafx.application.Application.getUserAgentStylesheet;
 import static javafx.application.Application.launch;
 
 public class EerieBasement implements AppScene{
-    static final String descriptionText = """
+    static final String DESCRIPTION_TEXT = """
                 *You enter a dimly-lit, empty basement through a creaky set of stairs. 
                 There is a message written sloppily in red, and it seems to be written by 
                 the ghost that haunts this basement, an old math teacher. 
@@ -61,7 +61,7 @@ public class EerieBasement implements AppScene{
         title1.setFont(new Font("Impact", 24));
 
         //Creates a label for the main description.
-        Label mainDesc = makeLabel(descriptionText, Color.WHITE);
+        Label mainDesc = makeLabel(DESCRIPTION_TEXT, Color.WHITE);
         mainDesc.setWrapText(true);
         mainDesc.setMaxWidth(500);
         mainDesc.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
