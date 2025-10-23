@@ -45,7 +45,7 @@ public class Bathroom implements AppScene {
     }
 
     @Override
-    public Scene getScene(Stage primaryStage) {
+    public Scene getScene(EventHandler<ActionEvent> goBack) {
         Label title = makeLabel(TITLE_TEXT, 32, Color.DARKRED);
         Label description = makeLabel(DESCRIPTION_TEXT, 16, Color.LIGHTGRAY);
         description.setWrapText(true);
@@ -65,7 +65,7 @@ public class Bathroom implements AppScene {
         writeButton.setOnAction(e -> writeMirrorMessage(input, mirrorText));
 
         Button backButton = new Button("Back to Main Hall");
-        backButton.setOnAction(e -> primaryStage.setScene(new MainHall().getScene(primaryStage)));
+        backButton.setOnAction(e -> goBack.handle(e));
 
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
@@ -90,10 +90,5 @@ public class Bathroom implements AppScene {
         Scene scene = new Scene(layout, 700, 500);
         scene.setFill(Color.BLACK);
         return scene;
-    }
-
-    @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
-        return null;
     }
 }
