@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class TheFinalDinner extends Application implements AppScene{
+public class TheFinalDinner implements AppScene{
     public Text makeText(String message, int wrapping, String font, int size, String style, int xLayout, int yLayout,
                          boolean isVisible){
         Text newText = new Text(message);
@@ -63,22 +63,10 @@ public class TheFinalDinner extends Application implements AppScene{
         return newButton;
     }
 
-    public static void pressButton(Button mainButton, Text txtOne, Text txtTwo, Text txtThree, Button btnOne, Button btnTwo){
-        mainButton.setOnAction(e -> {
-            txtOne.setVisible(false);
-            txtTwo.setVisible(false);
-            btnOne.setVisible(false);
-            btnTwo.setVisible(false);
-            txtThree.setVisible(true);
-        });
-    }
-    public static void pressButton(Button mainButton, Text txtOne, Text txtTwo, Button btnOne, Button btnTwo){
-        mainButton.setOnAction(e -> {
-            txtOne.setVisible(false);
-            txtTwo.setVisible(true);
-            btnOne.setVisible(false);
-            btnTwo.setVisible(true);
-        });
+    public static void setVisibility(boolean visibility, Node... nodes) {
+        for(Node n : nodes) {
+            n.setVisible(visibility);
+        }
     }
 
     public static void setGroupLayout(Node node, Rectangle rect1, int xPos1, Rectangle rect2, int xPos2,
@@ -133,24 +121,26 @@ public class TheFinalDinner extends Application implements AppScene{
         Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
         Button eatBtn = makeButton("Enjoy your meal", eatButtonStyle, 20, 325, true);
         Pane eat = new Pane(eatBtn);
-        pressButton(openNote,spookyTxt,headTxt,noteTxt,eatBtn,openNote);
-        pressButton(eatBtn,spookyTxt,headTxt,eatBtn,openNote);
+
+        homeBtn.setOnAction(e -> {
+            setVisibility(true, spookyTxt,headTxt,eatBtn);
+            setVisibility(false, noteTxt, headTxt,openNote);
+            goBack.handle(e);
+        });
+
+        openNote.setOnAction(e -> {
+            setVisibility(false, spookyTxt,headTxt,eatBtn,openNote);
+            setVisibility(true, noteTxt);
+        });
+
+        eatBtn.setOnAction( e-> {
+            setVisibility(false, spookyTxt, eatBtn);
+            setVisibility(true, headTxt, openNote);
+        });
 
         Pane layout = new Pane(titleText,bgText, table, eat, openNote, headTxt,noteTxt,homeBtn);
         layout.setBackground(Background.fill(Color.hsb(244,0.632,0.535)));
         Scene displayScene = new Scene(layout, 1000, 700);
         return displayScene;
-    }
-
-    public void start(Stage primaryStage) throws Exception{
-        Scene scene = getScene(null);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("The Final Dinner");
-        primaryStage.show();
-
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
