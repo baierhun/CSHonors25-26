@@ -1,6 +1,5 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,30 +9,26 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
-import static javafx.application.Application.getUserAgentStylesheet;
-import static javafx.application.Application.launch;
-
-public class EerieBasement implements AppScene{
+public class EerieBasement implements AppScene {
     static final String DESCRIPTION_TEXT = """
-                *You enter a dimly-lit, empty basement through a creaky set of stairs. 
-                There is a message written sloppily in red, and it seems to be written by 
-                the ghost that haunts this basement, an old math teacher. 
-                Click the button to see what it says.*
-                """;
+            *You enter a dimly-lit, empty basement through a creaky set of stairs. 
+            There is a message written sloppily in red, and it seems to be written by 
+            the ghost that haunts this basement, an old math teacher. 
+            Click the button to see what it says.*
+            """;
 
     //Function for creating a label.
-    private Label makeLabel(String text, Color fillColor){
+    private Label makeLabel(String text, Color fillColor) {
         Label l = new Label(text);
-        if (fillColor != null){
+        if (fillColor != null) {
             l.setTextFill(fillColor);
         }
         return l;
     }
 
     //When the button is clicked, reveals the message.
-    private void handleReveal(Label message){
+    private void handleReveal(Label message) {
         message.setVisible(true);
         message.setStyle("-fx-text-fill: red;");
         message.setAlignment(Pos.CENTER);
@@ -41,13 +36,12 @@ public class EerieBasement implements AppScene{
 
     }
 
-    private void handleSubmit(TextField answer, Label questionResponse){
+    private void handleSubmit(TextField answer, Label questionResponse) {
         String input = answer.getText().toLowerCase();
-        if(input.equals("5")){
+        if (input.equals("5")) {
             //Says correct
             questionResponse.setText("Correct! You are safe for now...");
-        }
-        else{
+        } else {
             //says wrong
             questionResponse.setText("Wrong! Watch out...");
         }
@@ -100,7 +94,7 @@ public class EerieBasement implements AppScene{
         lay.setAlignment(Pos.CENTER);
         lay.setFillWidth(true);
 
-        Scene scene = new Scene(lay, 600,400);
+        Scene scene = new Scene(lay, 600, 400);
         scene.setFill(Color.WHITE);
         return scene;
 
