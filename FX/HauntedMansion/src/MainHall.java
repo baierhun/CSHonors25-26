@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -24,7 +25,22 @@ public class MainHall extends Application {
         Scene dogHouseScene = new DogHouse().getScene(e -> primaryStage.setScene(mainScene));
         Button dogHouseBtn = new Button("Dog House");
         dogHouseBtn.setOnAction(e -> primaryStage.setScene(dogHouseScene));
-        layout.getChildren().add(dogHouseBtn);
+
+        Scene bathroomScene = new Bathroom().getScene(e -> primaryStage.setScene(mainScene));
+        Button bathroomBtn = new Button("Bathroom");
+        bathroomBtn.setOnAction(e -> primaryStage.setScene(bathroomScene));
+
+        Scene eerieBasementScene = new EerieBasement().getScene(e -> primaryStage.setScene(mainScene));
+        Button eerieBasementBtn = new Button("Eerie Basement");
+        eerieBasementBtn.setOnAction(e -> primaryStage.setScene(eerieBasementScene));
+
+        Scene finalDinnerScene = new TheFinalDinner().getScene(e -> primaryStage.setScene(mainScene));
+        Button finalDinnerBtn = new Button("Final Dinner");
+        finalDinnerBtn.setOnAction(e -> primaryStage.setScene(finalDinnerScene));
+
+        HBox buttons = new HBox(15, dogHouseBtn, bathroomBtn, eerieBasementBtn, finalDinnerBtn);
+        buttons.setAlignment(Pos.CENTER);
+        layout.getChildren().add(buttons);
 
         primaryStage.setTitle("Haunted Mansion");
         primaryStage.setScene(mainScene);
