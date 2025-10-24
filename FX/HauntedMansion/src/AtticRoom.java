@@ -27,7 +27,7 @@ public class AtticRoom implements AppScene {
     private static Label makeLabel(String text, Optional<String> color, Optional<Integer>fontSize, boolean isVisible){
         Label l = new Label(text);
         l.setVisible(isVisible);
-        l.setStyle(String.format("-fx-font-family: Papyrus, -fx-font-weight: bold; -fx-text-fill: %s; -fx-font-size: %d;,"), color.orElse("red"), fontSize.orElse(15));
+        l.setStyle(String.format("-fx-font-family: Papyrus, -fx-font-weight: bold; -fx-text-fill: %s; -fx-font-size: %d;,", color.orElse("red"), fontSize.orElse(15)));
         return l;
     }
 
@@ -43,13 +43,6 @@ public class AtticRoom implements AppScene {
         b.setOnAction(e);
         return b;
 
-    }
-    private static EventHandler<ActionEvent> back (Label secret, Node ghostLayout, TextField input, EventHandler<ActionEvent> goBack ) {
-        return e -> {
-            lay.setVisible(false);
-            input.clear();
-            goBack.handle(e);
-        };
     }
 
     private static StackPane makeGhost(boolean isVisible){
@@ -74,9 +67,7 @@ public class AtticRoom implements AppScene {
 
         Label description = makeLabel(d, Optional.empty(), Optional.of(12), true);
 
-        Button backButton = makeButton("BACK", back);
-
-
+        Button backButton = makeButton("BACK", goBack);
 
         //Create VBox with 3 elements 2 Labels and the StackPane object
         VBox lay = new VBox(20, title, description, makeGhost(true), backButton);

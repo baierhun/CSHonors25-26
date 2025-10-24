@@ -23,7 +23,7 @@ public class Attic implements AppScene {
     private static Label makeLabel(String text, Optional<String> color, Optional<Integer>fontSize, boolean isVisible){
         Label l = new Label(text);
         l.setVisible(isVisible);
-        l.setStyle(String.format("-fx-font-family: Papyrus, -fx-font-weight: bold; -fx-text-fill: %s; -fx-font-size: %d;,"), color.orElse("red"), fontSize.orElse(15));
+        l.setStyle(String.format("-fx-font-family: Papyrus; -fx-font-weight: bold; -fx-text-fill: %s; -fx-font-size: %d;", color.orElse("red"), fontSize.orElse(15)));
         return l;
     }
 
@@ -39,7 +39,7 @@ public class Attic implements AppScene {
         return field;
     }
 
-    private static EventHandler<ActionEvent> checkAnswer(TextField a, TextField b) {
+    private static EventHandler<ActionEvent> checkAnswer(TextField a, TextField b, Label message, TextField answerBox2, Label riddle2) {
         return event -> {
             String input1 = a.getText();
             if (input1.equalsIgnoreCase("A ghost") || input1.equalsIgnoreCase("Ghost")) {
@@ -51,7 +51,7 @@ public class Attic implements AppScene {
                 message.setText("INCORRECT");
                 message.setVisible(true);
             }
-            input2 = b.getText();
+            String input2 = b.getText();
             if (input2.equalsIgnoreCase("attic") || input2.equalsIgnoreCase("The attic") || input2.equalsIgnoreCase("An attic")) {
                 message.setText("CORRECT, THE ATTIC");
             } else {
@@ -61,18 +61,12 @@ public class Attic implements AppScene {
             }
         };
     }
-    private static EventHandler<ActionEvent> back (Label secret, Node ghostLayout, TextField input, EventHandler<ActionEvent> goBack ) {
+    private static EventHandler<ActionEvent> back (TextField input, EventHandler<ActionEvent> goBack ) {
         return e -> {
-            root.setVisible(false);
             input.clear();
             goBack.handle(e);
         };
     }
-
-
-
-
-
 
     @Override
     public Scene getScene(EventHandler<ActionEvent> goBack) {
@@ -87,8 +81,8 @@ public class Attic implements AppScene {
 
         Label message = makeLabel("", Optional.of("GREEN"), Optional.empty(), false);
 
-        Button checkButton = makeButton("Check Answer", checkAnswer(answerBox1, answerBox2));
-        Button home = makeButton("HOME", back());
+        Button checkButton = makeButton("Check Answer", checkAnswer(answerBox1, answerBox2, message, answerBox2, riddle2));
+        Button home = makeButton("HOME", back(answerBox1, goBack));
 
         VBox root = new VBox(5, prompt, riddle1, answerBox1, message, riddle2, answerBox2, checkButton ,home);
         root.setBackground(null);
