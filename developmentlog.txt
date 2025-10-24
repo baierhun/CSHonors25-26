@@ -1,1 +1,0 @@
-Initial Log - This week I learned how to install software on my computer through the terminal and I figured out how to open a git repo and commit text. 
