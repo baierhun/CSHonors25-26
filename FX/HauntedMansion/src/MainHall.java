@@ -38,7 +38,11 @@ public class MainHall extends Application {
         Button finalDinnerBtn = new Button("Final Dinner");
         finalDinnerBtn.setOnAction(e -> primaryStage.setScene(finalDinnerScene));
 
-        HBox buttons = new HBox(15, dogHouseBtn, bathroomBtn, eerieBasementBtn, finalDinnerBtn);
+        Scene atticScene = new Attic().getScene(e -> primaryStage.setScene(mainScene));
+        Button atticBtn = new Button("Attic");
+        atticBtn.setOnAction(e -> primaryStage.setScene(atticScene));
+
+        HBox buttons = new HBox(15, dogHouseBtn, bathroomBtn, eerieBasementBtn, finalDinnerBtn, atticBtn);
         buttons.setAlignment(Pos.CENTER);
         layout.getChildren().add(buttons);
 
