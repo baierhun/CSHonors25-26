@@ -1,6 +1,3 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,9 +8,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class TheFinalDinner implements AppScene{
+public class TheFinalDinner extends HauntedScene{
+
+    public TheFinalDinner(SceneSetter sceneSetter) {
+        super(sceneSetter);
+    }
+
     public Text makeText(String message, int wrapping, String font, int size, String style, int xLayout, int yLayout,
                          boolean isVisible){
         Text newText = new Text(message);
@@ -92,7 +93,7 @@ public class TheFinalDinner implements AppScene{
 
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label titleText = makeLabel("The Final Dinner", "Georgia", 30,
                 "-fx-font-weight:bold; -fx-text-fill: #FFFFFF; -fx-background-color:#383288ff;",
                 725, true);
@@ -125,7 +126,7 @@ public class TheFinalDinner implements AppScene{
         homeBtn.setOnAction(e -> {
             setVisibility(true, spookyTxt,headTxt,eatBtn);
             setVisibility(false, noteTxt, headTxt,openNote);
-            goBack.handle(e);
+            sceneSetter.goHome();
         });
 
         openNote.setOnAction(e -> {
