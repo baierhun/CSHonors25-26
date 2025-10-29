@@ -14,11 +14,15 @@ import javafx.scene.shape.Ellipse;
 
 import java.util.Optional;
 
-public class DogHouse implements AppScene {
+public class DogHouse extends HauntedScene {
     private static final String SECRET_TEXT = "A hidden note appears: 'Beware the ghost!'";
     private static final String RIDDLE = "I'm seen through glass, have no weight or clothes, \nand I only show up after your life is over—what am I?";
     private static final String ANSWER = "ghost";
     private static final String RED = "#991E06";
+
+    public DogHouse(SceneSetter sceneSetter) {
+        super(sceneSetter);
+    }
 
     private static Label makeLabel(String text, Optional<String> textFill, Optional<Integer> fontSize, Optional<Boolean> isVisible) {
         Label l = new Label(text);
@@ -73,13 +77,11 @@ public class DogHouse implements AppScene {
         };
     }
 
-    private static EventHandler<ActionEvent> back (Label secret, Node ghostLayout, TextField input, EventHandler<ActionEvent> goBack ) {
-        return e -> {
-            secret.setVisible(false);
-            ghostLayout.setVisible(false);
-            input.clear();
-            goBack.handle(e);
-        };
+    private EventHandler<ActionEvent> back (Label secret, Node ghostLayout, TextField input) {
+        secret.setVisible(false);
+        ghostLayout.setVisible(false);
+        input.clear();
+        return e -> sceneSetter.goHome();
     }
 
     private static EventHandler<ActionEvent> revealAction(Label secret, TextField input, Node ghostLayout) {
@@ -98,7 +100,7 @@ public class DogHouse implements AppScene {
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label title = makeLabel("The Dog House", Optional.of(RED), Optional.empty(), Optional.of(true));
         Label description = makeLabel("Dust floats in the air as an old chest sits in the corner...", Optional.empty(), Optional.empty(), Optional.empty() );
         Label secret = makeLabel(SECRET_TEXT, Optional.empty(), Optional.empty(), Optional.empty());
@@ -107,7 +109,7 @@ public class DogHouse implements AppScene {
         Button openChest = makeButton("Open the chest", openChest(secret));
 
         StackPane ghostLayout = makeGhost(false);
-        Button back = makeButton("Back to Main Hall", back(secret, ghostLayout, input, goBack));
+        Button back = makeButton("Back to Main Hall", back(secret, ghostLayout, input));
         Button revealButton = makeButton("Reveal Secret", revealAction(secret, input, ghostLayout));
 
         VBox layout = new VBox(10, title, description, openChest, input, revealButton, secret, ghostLayout, back);

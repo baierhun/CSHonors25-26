@@ -22,9 +22,9 @@ public class MainHall extends Application {
         Scene mainScene = new Scene(layout, 600, 400);
         mainScene.setFill(Color.BLACK);
 
-        SceneSetter sceneSetter = new SceneSetter(primaryStage);
+        SceneSetter sceneSetter = new SceneSetter(primaryStage, mainScene);
 
-        Scene dogHouseScene = new DogHouse().getScene(e -> primaryStage.setScene(mainScene));
+        Scene dogHouseScene = new DogHouse(sceneSetter).getScene();
         Button dogHouseBtn = new Button("Dog House");
         dogHouseBtn.setOnAction(e -> primaryStage.setScene(dogHouseScene));
 
