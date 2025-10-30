@@ -10,13 +10,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class EerieBasement implements AppScene {
+public class EerieBasement extends HauntedScene {
     static final String DESCRIPTION_TEXT = """
             *You enter a dimly-lit, empty basement through a creaky set of stairs. 
             There is a message written sloppily in red, and it seems to be written by 
             the ghost that haunts this basement, an old math teacher. 
             Click the button to see what it says.*
             """;
+
+    public EerieBasement(SceneSetter sceneSetter) {
+        super(sceneSetter);
+    }
 
     //Function for creating a label.
     private Label makeLabel(String text, Color fillColor) {
@@ -48,7 +52,7 @@ public class EerieBasement implements AppScene {
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
 
         //Creates a label for the title.
         Label title1 = makeLabel("The Eerie Basement", Color.WHITE);
@@ -86,7 +90,7 @@ public class EerieBasement implements AppScene {
 
         //When the button is clicked, send the user back to the home screen.
         Button homeButton = new Button("Go back home");
-        homeButton.setOnAction(e -> goBack.handle(e));
+        homeButton.setOnAction(e -> sceneSetter.goHome());
 
         //Vbox and its customizations.
         VBox lay = new VBox(10, title1, mainDesc, revealButton, message, answer, submitAnswer, questionResponse, homeButton);
