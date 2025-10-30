@@ -40,7 +40,7 @@ public class MainHall extends Application {
         Button finalDinnerBtn = new Button("Final Dinner");
         finalDinnerBtn.setOnAction(e -> primaryStage.setScene(finalDinnerScene));
 
-        Scene atticScene = new Attic().getScene(e -> primaryStage.setScene(mainScene));
+        Scene atticScene = new Attic(sceneSetter).getScene();
         Button atticBtn = new Button("Attic");
         atticBtn.setOnAction(e -> primaryStage.setScene(atticScene));
 
