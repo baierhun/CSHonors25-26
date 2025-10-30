@@ -28,7 +28,7 @@ public class MainHall extends Application {
         Button dogHouseBtn = new Button("Dog House");
         dogHouseBtn.setOnAction(e -> primaryStage.setScene(dogHouseScene));
 
-        Scene bathroomScene = new Bathroom().getScene(e -> primaryStage.setScene(mainScene));
+        Scene bathroomScene = new Bathroom(sceneSetter).getScene();
         Button bathroomBtn = new Button("Bathroom");
         bathroomBtn.setOnAction(e -> primaryStage.setScene(bathroomScene));
 
