@@ -55,8 +55,8 @@ public class EerieBasement extends HauntedScene {
     public Scene getScene() {
 
         //Creates a label for the title.
-        Label title1 = makeLabel("The Eerie Basement", Color.WHITE);
-        title1.setFont(new Font("Impact", 24));
+        Label titleOne = makeLabel("The Eerie Basement", Color.WHITE);
+        titleOne.setFont(new Font("Impact", 24));
 
         //Creates a label for the main description.
         Label mainDesc = makeLabel(DESCRIPTION_TEXT, Color.WHITE);
@@ -93,7 +93,7 @@ public class EerieBasement extends HauntedScene {
         homeButton.setOnAction(e -> sceneSetter.goHome());
 
         //Vbox and its customizations.
-        VBox lay = new VBox(10, title1, mainDesc, revealButton, message, answer, submitAnswer, questionResponse, homeButton);
+        VBox lay = new VBox(10, titleOne, mainDesc, revealButton, message, answer, submitAnswer, questionResponse, homeButton);
         lay.setStyle("-fx-background-color: linear-gradient(to bottom, #1a1a1a, #787878);");
         lay.setAlignment(Pos.CENTER);
         lay.setFillWidth(true);
