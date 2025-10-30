@@ -77,20 +77,19 @@ public class DogHouse extends HauntedScene {
         };
     }
 
-    private EventHandler<ActionEvent> back (Label secret, Node ghostLayout, TextField input) {
+    private EventHandler<ActionEvent> back (Label secret, TextField input) {
         secret.setVisible(false);
-        ghostLayout.setVisible(false);
         input.clear();
         return e -> sceneSetter.goHome();
     }
 
-    private static EventHandler<ActionEvent> revealAction(Label secret, TextField input, Node ghostLayout) {
+    private EventHandler<ActionEvent> revealAction(Label secret, TextField input) {
         return e -> {
             if (ANSWER.equalsIgnoreCase(input.getText().trim())) {
                 secret.setText(SECRET_TEXT);
                 secret.setVisible(true);
                 secret.setStyle(String.format("%s-fx-text-fill: %s;", secret.getStyle(), RED));
-                ghostLayout.setVisible(true);
+                sceneSetter.goTo(ghostScene());
             } else {
                 secret.setText("Nothing happens...");
                 secret.setVisible(true);
@@ -108,11 +107,10 @@ public class DogHouse extends HauntedScene {
         TextField input = makeInput("Type a secret word...");
         Button openChest = makeButton("Open the chest", openChest(secret));
 
-        StackPane ghostLayout = makeGhost(false);
-        Button back = makeButton("Back to Main Hall", back(secret, ghostLayout, input));
-        Button revealButton = makeButton("Reveal Secret", revealAction(secret, input, ghostLayout));
+        Button back = makeButton("Back to Main Hall", back(secret, input));
+        Button revealButton = makeButton("Reveal Secret", revealAction(secret, input));
 
-        VBox layout = new VBox(10, title, description, openChest, input, revealButton, secret, ghostLayout, back);
+        VBox layout = new VBox(10, title, description, openChest, input, revealButton, secret, back);
         layout.setBackground(null);
         layout.setAlignment(Pos.CENTER);
 
@@ -121,5 +119,13 @@ public class DogHouse extends HauntedScene {
         return s;
     }
 
+    private Scene ghostScene() {
+        StackPane ghostLayout = makeGhost(true);
+        Button back = makeButton("Back", e -> sceneSetter.goTo(getScene()));
+        VBox layout = new VBox(10, ghostLayout, back);
+        layout.setAlignment(Pos.CENTER);
+
+        return new Scene(layout, 600, 400);
+    }
 
 }
