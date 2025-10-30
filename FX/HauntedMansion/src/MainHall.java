@@ -12,6 +12,7 @@ public class MainHall extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Label title = new Label("Welcome to the Haunted Mansion!");
         title.setTextFill(Color.CHOCOLATE);
 
@@ -36,7 +37,8 @@ public class MainHall extends Application {
         Button eerieBasementBtn = new Button("Eerie Basement");
         eerieBasementBtn.setOnAction(e -> primaryStage.setScene(eerieBasementScene));
 
-        Scene finalDinnerScene = new TheFinalDinner().getScene(e -> primaryStage.setScene(mainScene));
+        Scene finalDinnerScene = new TheFinalDinner(sceneSetter).getScene();
+        //Scene finalDinnerScene = new TheFinalDinner().getScene(e -> primaryStage.setScene(mainScene));
         Button finalDinnerBtn = new Button("Final Dinner");
         finalDinnerBtn.setOnAction(e -> primaryStage.setScene(finalDinnerScene));
 
