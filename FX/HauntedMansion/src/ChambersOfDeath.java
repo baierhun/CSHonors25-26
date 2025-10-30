@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +8,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class ChambersOfDeath implements AppScene {
+public class ChambersOfDeath extends HauntedScene {
+
+    public ChambersOfDeath(SceneSetter sceneSetter) {
+        super(sceneSetter);
+    }
 
     private Label createTitle() {
         Label title = new Label("Chambers of Death");
@@ -71,7 +73,7 @@ public class ChambersOfDeath implements AppScene {
         return button;
     }
 
-    private Button createLeaveButton(EventHandler<ActionEvent> goBack, Label windows, Label bed, Label closet, TextField riddle, Label answer) {
+    private Button createLeaveButton(Label windows, Label bed, Label closet, TextField riddle, Label answer) {
         Button button = new Button("Go Back to Main Hall");
         button.setOnAction(e -> {
             windows.setVisible(false);
@@ -79,7 +81,7 @@ public class ChambersOfDeath implements AppScene {
             closet.setVisible(false);
             answer.setVisible(false);
             riddle.clear();
-            goBack.handle(e);
+            sceneSetter.goHome();
         });
         return button;
     }
@@ -106,7 +108,7 @@ public class ChambersOfDeath implements AppScene {
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label title = createTitle();
         Label windowsLabel = createDescriptionLabel("You go to unboard the windows and you hear a whooshing behind you and it's a ghost!");
         Label bedLabel = createDescriptionLabel("You go to look in the bed and you see millions of lice crawling through the bed and they even get on you.");
@@ -118,7 +120,7 @@ public class ChambersOfDeath implements AppScene {
         Button bedButton = createToggleButton("Look in the Bed", bedLabel);
         Button closetButton = createToggleButton("Check out the Closet", closetLabel);
         Button answerButton = createAnswerButton(riddleInput, answerLabel);
-        Button leaveButton = createLeaveButton(goBack, windowsLabel, bedLabel, closetLabel, riddleInput, answerLabel);
+        Button leaveButton = createLeaveButton(windowsLabel, bedLabel, closetLabel, riddleInput, answerLabel);
 
         HBox actionButtons = createButtonRow(windowsButton, bedButton, closetButton);
         HBox bottomRow = createBottomRow(leaveButton, answerLabel);
