@@ -15,11 +15,11 @@ public class MainHall extends Application {
         Label title = new Label("Welcome to the Haunted Mansion!");
         title.setTextFill(Color.CHOCOLATE);
 
-        VBox lay = new VBox(15, title);
-        lay.setAlignment(Pos.CENTER);
-        lay.setBackground(null);
+        VBox layout = new VBox(15, title);
+        layout.setAlignment(Pos.CENTER);
+        layout.setBackground(null);
 
-        Scene mainScene = new Scene(lay, 600, 400);
+        Scene mainScene = new Scene(layout, 600, 400);
         mainScene.setFill(Color.BLACK);
 
         SceneSetter sceneSetter = new SceneSetter(primaryStage, mainScene);
@@ -46,7 +46,7 @@ public class MainHall extends Application {
 
         HBox buttons = new HBox(15, dogHouseBtn, bathroomBtn, eerieBasementBtn, finalDinnerBtn, atticBtn);
         buttons.setAlignment(Pos.CENTER);
-        lay.getChildren().add(buttons);
+        layout.getChildren().add(buttons);
 
         primaryStage.setTitle("Haunted Mansion");
         primaryStage.setScene(mainScene);
