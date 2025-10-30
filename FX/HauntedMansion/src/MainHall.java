@@ -32,7 +32,7 @@ public class MainHall extends Application {
         Button bathroomBtn = new Button("Bathroom");
         bathroomBtn.setOnAction(e -> primaryStage.setScene(bathroomScene));
 
-        Scene eerieBasementScene = new EerieBasement().getScene(e -> primaryStage.setScene(mainScene));
+        Scene eerieBasementScene = new EerieBasement(sceneSetter).getScene();
         Button eerieBasementBtn = new Button("Eerie Basement");
         eerieBasementBtn.setOnAction(e -> primaryStage.setScene(eerieBasementScene));
 
