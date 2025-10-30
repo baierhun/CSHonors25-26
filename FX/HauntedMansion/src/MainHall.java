@@ -12,7 +12,6 @@ public class MainHall extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Label title = new Label("Welcome to the Haunted Mansion!");
         title.setTextFill(Color.CHOCOLATE);
 
