@@ -13,7 +13,11 @@ import org.w3c.dom.Text;
 import java.util.Optional;
 
 
-public class Attic implements AppScene {
+public class Attic extends HauntedScene {
+
+    public Attic(SceneSetter sceneSetter){
+        super(sceneSetter);
+    }
 
     private static final String rb1 = "I drift without a sail, I moan without a throat, +\n you see right through my body. What am I?";
     private static final String rb2 = "By day I sleep beneath the floor, at night I glide and roam.  Where do I call home?";
@@ -61,15 +65,13 @@ public class Attic implements AppScene {
             }
         };
     }
-    private static EventHandler<ActionEvent> back (TextField input, EventHandler<ActionEvent> goBack ) {
-        return e -> {
-            input.clear();
-            goBack.handle(e);
-        };
+    private EventHandler<ActionEvent> back (TextField input) {
+        input.clear();
+        return e -> {sceneSetter.goHome();};
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label prompt = makeLabel(p,Optional.empty(), Optional.of(25), true);
 
         Label riddle1 = makeLabel(rb1,Optional.empty(),Optional.empty(), true);
@@ -82,7 +84,7 @@ public class Attic implements AppScene {
         Label message = makeLabel("", Optional.of("GREEN"), Optional.empty(), false);
 
         Button checkButton = makeButton("Check Answer", checkAnswer(answerBox1, answerBox2, message, answerBox2, riddle2));
-        Button home = makeButton("HOME", back(answerBox1, goBack));
+        Button home = makeButton("HOME", back(answerBox1));
 
         VBox root = new VBox(5, prompt, riddle1, answerBox1, message, riddle2, answerBox2, checkButton ,home);
         root.setBackground(null);
