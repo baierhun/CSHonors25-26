@@ -49,7 +49,7 @@ public class Bathroom extends HauntedScene {
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label title = makeLabel(TITLE_TEXT, 32, Color.DARKRED);
         Label description = makeLabel(DESCRIPTION_TEXT, 16, Color.LIGHTGRAY);
         description.setWrapText(true);
