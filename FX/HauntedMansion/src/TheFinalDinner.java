@@ -115,8 +115,6 @@ public class TheFinalDinner extends HauntedScene{
         Text headTxt = makeText("You lift the serving dish to find a severed head and" +
                 " something engraved in the plate", 550, "Georgia", 27, "-fx-fill: #faf7ff",
                 17, 37, false);
-        //Text noteTxt = makeText("Don't trust the voices.", 550, "monospace", 27,"-fx-fill: #b61d1d", 17, 37, false);
-
         Button homeBtn = makeButton("Home", homeBtnStyle, 915, 650, true);
         Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
         Button eatBtn = makeButton("Enjoy your meal", eatButtonStyle, 20, 325, true);
@@ -132,7 +130,6 @@ public class TheFinalDinner extends HauntedScene{
             setVisibility(false, spookyTxt,headTxt,eatBtn,openNote);
             setVisibility(false);
             sceneSetter.goTo(letterScene());
-            //sceneSetter.goHome();
         });
 
         eatBtn.setOnAction( e-> {
