@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class Bathroom implements AppScene {
+public class Bathroom extends HauntedScene {
 
     private static final String TITLE_TEXT = "The 'Scary' Bathroom";
     private static final String DESCRIPTION_TEXT = """
@@ -20,6 +20,10 @@ public class Bathroom implements AppScene {
             The closet door rattles, and a low groan echoes behind you...
             """;
     private static final String HIDDEN_TEXT = "A whisper echoes: 'You shouldn’t have come here…'";
+
+    public Bathroom(SceneSetter sceneSetter) {
+        super(sceneSetter);
+    }
 
     private Label makeLabel(String text, int size, Color color) {
         Label label = new Label(text);
@@ -45,7 +49,7 @@ public class Bathroom implements AppScene {
     }
 
     @Override
-    public Scene getScene(EventHandler<ActionEvent> goBack) {
+    public Scene getScene() {
         Label title = makeLabel(TITLE_TEXT, 32, Color.DARKRED);
         Label description = makeLabel(DESCRIPTION_TEXT, 16, Color.LIGHTGRAY);
         description.setWrapText(true);
@@ -65,7 +69,7 @@ public class Bathroom implements AppScene {
         writeButton.setOnAction(e -> writeMirrorMessage(input, mirrorText));
 
         Button backButton = new Button("Back to Main Hall");
-        backButton.setOnAction(e -> goBack.handle(e));
+        backButton.setOnAction(e -> sceneSetter.goHome());
 
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
