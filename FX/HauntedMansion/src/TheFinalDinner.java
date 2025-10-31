@@ -91,6 +91,19 @@ public class TheFinalDinner extends HauntedScene{
     String homeBtnStyle = "-fx-background-color:#000000ff;-fx-text-fill:#ffffff;" +
             "-fx-font-size: 18px; " + "-fx-border radius: 8px;-fx-font-family:Georgia;";
 
+    public void goingHome(Text txt1, Text txt2, Button btn1, Button btn2){
+        setVisibility(true,txt1, txt2, btn1);
+        setVisibility(false, txt2, btn2);
+        sceneSetter.goHome();
+    }
+
+    Text spookyTxt = makeText(introParagraph, 550, "Georgia", 27,
+            "-fx-fill: #faf7ff", 17, 37, true);
+    Text headTxt = makeText("You lift the serving dish to find a severed head and" +
+                    " something engraved in the plate", 550, "Georgia", 27, "-fx-fill: #faf7ff",
+            17, 37, false);
+    Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
+    Button eatBtn = makeButton("Enjoy your meal", eatButtonStyle, 20, 325,true);
 
     @Override
     public Scene getScene() {
@@ -99,8 +112,8 @@ public class TheFinalDinner extends HauntedScene{
                 725, true);
         Rectangle txtRectangle = makeRectangle(10,10,600,300,244,
                 0.727,0.173, "-fx-stroke: #4D1005; -fx-stroke-width: 1", true);
-        Text spookyTxt = makeText(introParagraph, 550, "Georgia", 27,
-                "-fx-fill: #faf7ff", 17, 37, true);
+//        Text spookyTxt = makeText(introParagraph, 550, "Georgia", 27,
+//                "-fx-fill: #faf7ff", 17, 37, true);
         Pane bgText = new Pane(txtRectangle, spookyTxt);
 
         Rectangle tableHead = makeRectangle(-670, 360, 400, 28, Color.SIENNA,
@@ -112,18 +125,19 @@ public class TheFinalDinner extends HauntedScene{
         Pane table = new Pane(tableHead,tableLeg1,tableLeg2);
         setGroupLayout(table,tableHead,700,tableLeg1,740,tableLeg2,740,175);
 
-        Text headTxt = makeText("You lift the serving dish to find a severed head and" +
-                " something engraved in the plate", 550, "Georgia", 27, "-fx-fill: #faf7ff",
-                17, 37, false);
+//        Text headTxt = makeText("You lift the serving dish to find a severed head and" +
+//                " something engraved in the plate", 550, "Georgia", 27, "-fx-fill: #faf7ff",
+//                17, 37, false);
         Button homeBtn = makeButton("Home", homeBtnStyle, 915, 650, true);
-        Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
-        Button eatBtn = makeButton("Enjoy your meal", eatButtonStyle, 20, 325, true);
+//        Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
+//        Button eatBtn = makeButton("Enjoy your meal", eatButtonStyle, 20, 325, true);
         Pane eat = new Pane(eatBtn);
 
         homeBtn.setOnAction(e -> {
-            setVisibility(true, spookyTxt,headTxt,eatBtn);
-            setVisibility(false, headTxt,openNote);
-            sceneSetter.goHome();
+//            setVisibility(true, spookyTxt,headTxt,eatBtn);
+//            setVisibility(false, headTxt,openNote);
+//            sceneSetter.goHome();
+            goingHome(spookyTxt, headTxt, eatBtn, openNote);
         });
 
         openNote.setOnAction(e -> {
@@ -152,6 +166,7 @@ public class TheFinalDinner extends HauntedScene{
 
         homeBtn.setOnAction(e -> {
             sceneSetter.goHome();
+            goingHome(spookyTxt, headTxt, eatBtn, openNote);
         });
 
         Pane secondLayout = new Pane(letter, letterText, homeBtn);
