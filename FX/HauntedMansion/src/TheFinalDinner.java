@@ -115,8 +115,7 @@ public class TheFinalDinner extends HauntedScene{
         Text headTxt = makeText("You lift the serving dish to find a severed head and" +
                 " something engraved in the plate", 550, "Georgia", 27, "-fx-fill: #faf7ff",
                 17, 37, false);
-        Text noteTxt = makeText("Don't trust the voices.", 550, "monospace", 27,
-                "-fx-fill: #b61d1d", 17, 37, false);
+        //Text noteTxt = makeText("Don't trust the voices.", 550, "monospace", 27,"-fx-fill: #b61d1d", 17, 37, false);
 
         Button homeBtn = makeButton("Home", homeBtnStyle, 915, 650, true);
         Button openNote = makeButton("Read the message", openNoteBtnStyle, 20, 325, false);
@@ -125,13 +124,15 @@ public class TheFinalDinner extends HauntedScene{
 
         homeBtn.setOnAction(e -> {
             setVisibility(true, spookyTxt,headTxt,eatBtn);
-            setVisibility(false, noteTxt, headTxt,openNote);
+            setVisibility(false, headTxt,openNote);
             sceneSetter.goHome();
         });
 
         openNote.setOnAction(e -> {
             setVisibility(false, spookyTxt,headTxt,eatBtn,openNote);
-            setVisibility(true, noteTxt);
+            setVisibility(false);
+            sceneSetter.goTo(letterScene());
+            //sceneSetter.goHome();
         });
 
         eatBtn.setOnAction( e-> {
@@ -139,9 +140,25 @@ public class TheFinalDinner extends HauntedScene{
             setVisibility(true, headTxt, openNote);
         });
 
-        Pane layout = new Pane(titleText,bgText, table, eat, openNote, headTxt,noteTxt,homeBtn);
+        Pane layout = new Pane(titleText,bgText, table, eat, openNote, headTxt,homeBtn);
         layout.setBackground(Background.fill(Color.hsb(244,0.632,0.535)));
         Scene displayScene = new Scene(layout, 1000, 700);
         return displayScene;
+    }
+
+    public Scene letterScene(){
+        Rectangle letter = makeRectangle(300,30,400,600,45,
+                0.11,1.0,"-fx-stroke: #2e2601; -fx-stroke-width: 2",true);
+        Text letterText = makeText("Don't trust the voices.", 550, "monospace", 27,
+                "-fx-fill: #b61d1d", 315, 77, true);
+        Button homeBtn = makeButton("Home", homeBtnStyle, 915, 650, true);
+
+        homeBtn.setOnAction(e -> {
+            sceneSetter.goHome();
+        });
+
+        Pane secondLayout = new Pane(letter, letterText, homeBtn);
+        secondLayout.setBackground(Background.fill(Color.hsb(2,0.99,0.2)));
+        return new Scene(secondLayout,1000,700);
     }
 }
