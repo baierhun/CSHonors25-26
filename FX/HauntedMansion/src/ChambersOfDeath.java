@@ -59,6 +59,35 @@ public class ChambersOfDeath extends HauntedScene {
         return button;
     }
 
+    private Button createClosetButton(String text) {
+        Button closetButton = new Button(text);
+        Scene closetScene = new ChambersOfDeath(sceneSetter).closetScene();
+        closetButton.setOnAction(e -> sceneSetter.goTo(closetScene));
+        return closetButton;
+    }
+
+    private Scene closetScene() {
+        Label closetLabel = createClosetLabel();
+        closetLabel.setVisible(true);
+        TextField riddleInput = createRiddleInput();
+        Label answerLabel = createAnswerLabel();
+
+        Button answerButton = createAnswerButton(riddleInput, answerLabel);
+        Button leaveButton = new Button("Go Back to the Chambers of Death");
+        leaveButton.setOnAction(e -> {
+            answerLabel.setVisible(false);
+            sceneSetter.goTo(getScene());
+        });
+
+        VBox layout = new VBox(30, closetLabel, riddleInput, answerButton, answerLabel, leaveButton);
+        layout.setAlignment(Pos.CENTER);
+        layout.setBackground(null);
+
+        Scene scene = new Scene(layout, 600, 400);
+        scene.setFill(Color.MAROON);
+        return scene;
+    }
+
     private Button createAnswerButton(TextField riddleInput, Label answerLabel) {
         Button button = new Button("Check your answer");
         button.setOnAction(e -> {
@@ -73,14 +102,11 @@ public class ChambersOfDeath extends HauntedScene {
         return button;
     }
 
-    private Button createLeaveButton(Label windows, Label bed, Label closet, TextField riddle, Label answer) {
+    private Button createLeaveButton(Label windows, Label bed) {
         Button button = new Button("Go Back to Main Hall");
         button.setOnAction(e -> {
             windows.setVisible(false);
             bed.setVisible(false);
-            closet.setVisible(false);
-            answer.setVisible(false);
-            riddle.clear();
             sceneSetter.goHome();
         });
         return button;
@@ -93,15 +119,9 @@ public class ChambersOfDeath extends HauntedScene {
         return row;
     }
 
-    private HBox createBottomRow(Button leaveButton, Label answer) {
-        HBox bottom = new HBox(50, leaveButton, answer);
-        bottom.setAlignment(Pos.CENTER);
-        return bottom;
-    }
-
-    private VBox createLayout(Label title, HBox buttons, TextField riddle, Button answerButton,
-                              Label windows, Label bed, Label closet, HBox bottom) {
-        VBox layout = new VBox(10, title, buttons, riddle, answerButton, windows, bed, closet, bottom);
+    private VBox createLayout(Label title, HBox buttons,
+                              Label windows, Label bed, Button leaveButton) {
+        VBox layout = new VBox(50, title, buttons, windows, bed, leaveButton);
         layout.setAlignment(Pos.CENTER);
         layout.setBackground(null);
         return layout;
@@ -112,20 +132,15 @@ public class ChambersOfDeath extends HauntedScene {
         Label title = createTitle();
         Label windowsLabel = createDescriptionLabel("You go to unboard the windows and you hear a whooshing behind you and it's a ghost!");
         Label bedLabel = createDescriptionLabel("You go to look in the bed and you see millions of lice crawling through the bed and they even get on you.");
-        Label closetLabel = createClosetLabel();
-        TextField riddleInput = createRiddleInput();
-        Label answerLabel = createAnswerLabel();
 
         Button windowsButton = createToggleButton("Unboard the Windows", windowsLabel);
         Button bedButton = createToggleButton("Look in the Bed", bedLabel);
-        Button closetButton = createToggleButton("Check out the Closet", closetLabel);
-        Button answerButton = createAnswerButton(riddleInput, answerLabel);
-        Button leaveButton = createLeaveButton(windowsLabel, bedLabel, closetLabel, riddleInput, answerLabel);
+        Button closetButton = createClosetButton("Check out the Closet");
+        Button leaveButton = createLeaveButton(windowsLabel, bedLabel);
 
         HBox actionButtons = createButtonRow(windowsButton, bedButton, closetButton);
-        HBox bottomRow = createBottomRow(leaveButton, answerLabel);
 
-        VBox layout = createLayout(title, actionButtons, riddleInput, answerButton, windowsLabel, bedLabel, closetLabel, bottomRow);
+        VBox layout = createLayout(title, actionButtons, windowsLabel, bedLabel, leaveButton);
 
         Scene scene = new Scene(layout, 600, 400);
         scene.setFill(Color.MAROON);
