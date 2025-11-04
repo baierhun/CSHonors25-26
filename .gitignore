@@ -1,5 +1,24 @@
-out/
-.idea/
+# Gradle Build Output and Cache
+.gradle/
+**/build/
+**/build/tmp/
 *.class
+.gradletasknamecache
+
+# Local Configuration
+local.properties
+
+# IDE Settings (e.g., IntelliJ/Android Studio)
+.idea/
 *.iml
+*.iws
+*.ipr
+/out/
+
+# Keystore for signing (contains sensitive data)
+*.jks
+*.keystore
+
+# Operating System Files
 .DS_Store
+Thumbs.db
