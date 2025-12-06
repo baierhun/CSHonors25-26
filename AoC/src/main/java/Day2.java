@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Function;
 
@@ -9,6 +10,22 @@ public class Day2 {
 
     public Day2(Function<String, Boolean> isInvalid) {
         this.isInvalid = isInvalid;
+    }
+
+    // ex: 11111111, 12121212, 123123123, 12341234
+    public static boolean isInvalidTwo(String number) {
+        // quick cases: single digit is valid, all same digit is invalid
+        if (number.length() == 1) return false;
+        String[] singles = number.split("");
+        if (Arrays.stream(singles).distinct().count() == 1) return true;
+
+        int maxWindowSize = number.length() / 2;
+        String[] splits;
+        for (int windowSize = 2; windowSize <= maxWindowSize; windowSize++) {
+            splits = number.split(number.substring(0, windowSize));
+            if (splits.length == 0) return true;
+        }
+        return false;
     }
 
     public static boolean isInvalidOne(String number) {
@@ -62,7 +79,8 @@ public class Day2 {
     public static void main(String[] args) throws FileNotFoundException {
         File data = new File("AoC/src/main/java/day2-1");
         Scanner in = new Scanner(data);
-        Day2 app = new Day2(Day2::isInvalidOne);
+//        Day2 app = new Day2(Day2::isInvalidOne);
+        Day2 app = new Day2(Day2::isInvalidTwo);
         app.runOne(in);
         System.out.println(app.sum);
     }
