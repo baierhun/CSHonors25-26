@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 class Point {
     public int x;
@@ -21,6 +18,7 @@ class Point {
 
 public class Day4 {
     private ArrayList<String> data = new ArrayList<>();
+    private Set<Point> removedPoints = new HashSet<>();
     private Scanner in;
     private int maxX = 0;
     private int maxY = 0;
@@ -53,7 +51,55 @@ public class Day4 {
         return input == '@';
     }
 
-    public void processInput() {
+    public void printBoard() {
+        for (String line : data) {
+            System.out.println(String.join("", line.split("")));
+        }
+    }
+
+    public void removePoints() {
+        String line;
+        StringBuilder s;
+        for(Point point : removedPoints){
+            line = data.get(point.y);
+            s = new StringBuilder(line.substring(0, point.x));
+            s.append(".");
+            s.append(line.substring(point.x + 1));
+            data.set(point.y, s.toString());
+        }
+        removedPoints.clear();
+    }
+
+    public void part2() {
+        while (in.hasNext()) data.add(in.nextLine());
+        int accessibleRolesOneRound = 0;
+        int accessibleRolesTotal = 0;
+        String line;
+        maxX = data.getFirst().length();
+        maxY = data.size();
+        do {
+            accessibleRolesOneRound = 0;
+            for (int y = 0; y < data.size(); y++) {
+                line = data.get(y);
+                for (int x = 0; x < line.length(); x++) {
+                    if (isPaperRoll(line.charAt(x))) {
+                        int adjacentRolls = getAdjacentRolls(x, y);
+                        if (adjacentRolls < 4) {
+                            accessibleRolesOneRound++;
+                            removedPoints.add(new Point(x, y));
+                        }
+                    }
+                }
+            }
+            accessibleRolesTotal += accessibleRolesOneRound;
+            removePoints();
+//            printBoard();
+        } while (accessibleRolesOneRound > 0);
+        System.out.println(accessibleRolesTotal);
+    }
+
+    public void part1() {
+        while (in.hasNext()) data.add(in.nextLine());
         String line;
         int accessibleRoles = 0;
         maxX = data.getFirst().length();
@@ -68,11 +114,6 @@ public class Day4 {
             }
         }
         System.out.println(accessibleRoles);
-    }
-
-    public void part1() {
-        while (in.hasNext()) data.add(in.nextLine());
-        processInput();
     }
 
     public static void main(String[] args) throws FileNotFoundException {
