@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 enum Side {
@@ -45,9 +46,9 @@ class Splitter {
 }
 
 public class Day7 {
-    File dataFile = new File("AoC/src/main/java/day7-1");
+    File dataFile = new File("AoC/src/main/java/day7-2");
     Scanner in = new Scanner(dataFile);
-    int total = 0;
+    long total = 0;
 
     public Day7() throws FileNotFoundException {
     }
@@ -109,11 +110,11 @@ public class Day7 {
         return lines;
     }
 
-    public void processQueue(Splitter s, List<String> lines, Queue<Splitter> queue) {
+    public void processQueue(Splitter s, String[] lines, Stack<Splitter> queue) {
         // go right once, then all lefts
         int targetIndex = s.index + 1;
-        for (int i = s.lineNumber + 2; i < lines.size(); i += 2) {
-            if (lines.get(i).charAt(targetIndex) == '^') {
+        for (int i = s.lineNumber + 2; i < lines.length; i += 2) {
+            if (lines[i].charAt(targetIndex) == '^') {
                 queue.add(new Splitter(i, targetIndex));
                 targetIndex -= 1;
             }
@@ -122,14 +123,19 @@ public class Day7 {
     }
 
     public void runIILoops() {
-        Queue<Splitter> rightQueue = new LinkedList<>();
+        Stack<Splitter> rightQueue = new Stack<>();
         List<String> lines = getData();
-        int sIndex = lines.getFirst().indexOf('S');
+        String[] s = new String[lines.size()];
+        int i = 0;
+        for(String line : lines){
+            s[i] = line;
+            i++;
+        }
         // artificially left align first one
         Splitter firstSplitter = new Splitter(0, lines.get(0).indexOf("S") - 1);
-        rightQueue.add(firstSplitter);
+        rightQueue.push(firstSplitter);
         while (!rightQueue.isEmpty()) {
-            processQueue(rightQueue.remove(), lines, rightQueue);
+            processQueue(rightQueue.pop(), s, rightQueue);
         }
 
     }
