@@ -1,3 +1,8 @@
+package org.example.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -25,8 +30,10 @@ class Actor {
     }
 }
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) throws SQLException {
+        SpringApplication.run(Main.class, args);
         String url = "jdbc:sqlite:/Users/paulbaier/School/SoftwareEngineering/db/Sakila";
         Connection conn = null;
         Statement stmt = null;
